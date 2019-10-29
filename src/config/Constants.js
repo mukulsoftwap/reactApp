@@ -1,5 +1,5 @@
 module.exports = {
-    BASE_URL: 'http://demo7939192.mockable.io',
+    BASE_URL: 'http://demo7939192.mockable.io/',
     COLOR: {
       ORANGE: '#C50',
       DARKBLUE: '#0F3274',

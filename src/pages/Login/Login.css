@@ -1,0 +1,17 @@
+.formBox{
+    border: 1px solid #e6e6e6;
+    padding: 40px 20px;
+    margin-top: 50px;
+    max-width: 300px;
+    background-color: #FFF;
+}
+.formBox input{
+    background: #fafafa;
+    font-size: 10px;
+    padding: 16px;
+    border: 1px solid #efefef;
+}
+body, html{
+    background-color: #fafafa !important;
+    height: 100%;
+}
