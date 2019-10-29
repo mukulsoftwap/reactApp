@@ -1,26 +1,72 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import { Link } from 'react-router-dom'
+import './App.css'
+import Constants from './config/Constants';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Row, Col, Container, Card, Button} from 'react-bootstrap'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      feeds : []
+    }
+    this.getFeeds();
+  }
+
+  getFeeds(){
+    let url = Constants.BASE_URL + "/feeds";
+    fetch(url)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({feeds : result});
+        },
+        (error) => {
+        }
+      )
+  }
+
+  likePost(index){
+    console.log(index)
+  }
+
+  checkLogin(){
+    
+  }
+
+  render() {
+    let likeimg = require('./images/like.png')
+    return (
+      <Container style={{maxWidth:960}}>
+        <Row>
+          {
+            this.state.feeds.map((feed, index)=>{
+              return (
+                <Col key={index} md="4">
+                  <div className={'mycard'}>
+                    <img src={feed.img} />
+                    <div className={'iconOverlay'}>
+                      <span>
+                          <img variant="top" src={likeimg} style={{width:20, height:20}} onClick={this.likePost.bind(this, index)}/>
+                          <i>{feed.likes}</i>
+                      </span>
+                      
+                    </div>
+                  </div>
+                </Col>
+              )
+            })
+          }
+        </Row>
+      </Container>
+      // <div>
+
+      //   <Link to="/login">Login</Link>
+      // </div>
+    );
+  }
 }
 
-export default App;
+export default App
