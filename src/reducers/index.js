@@ -1,4 +1,4 @@
-const reducer = (state = { cityName: 'London' }, action) => {
+const reducer = (state = [] , action) => {
     switch (action.type) {
       case 'ALL_POST':
         return { ...state, loading: true, callDone: true };

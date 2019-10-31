@@ -10,7 +10,8 @@ class PostCard extends React.Component {
         this.state = {
             postData : this.props.data,
             index : this.props.position,
-            redirectToLogin : false
+            redirectToLogin : false,
+            liked : false
         }
     }
 
@@ -27,16 +28,17 @@ class PostCard extends React.Component {
     }
 
     addToLikePost(index){
-        console.log(index)
+        this.setState({liked : !this.state.liked})
+        this.state.liked ? this.state.postData.likes-=1 : this.state.postData.likes+=1
     }
 
     render(){
-        let likeimg = require('../../images/like.png')
+        let likeimg = require(this.state.liked ? '../../images/like.png' : '../../images/unlike.png')
         return(
             <div>
                 {this.state.redirectToLogin ? <Redirect to='/login' /> : null}
                 <div className={'mycard'}>
-                    <img src={this.state.postData.img} />
+                    <img src={this.state.postData.img} className={'shimmer'}/>
                     <div className={'iconOverlay'}>
                         <span>
                             <img variant="top" src={likeimg} style={{width:20, height:20}} onClick={this.likePost.bind(this, this.state.index)}/>

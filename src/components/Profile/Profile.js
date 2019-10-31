@@ -6,6 +6,7 @@ import { Row, Col, Container, Nav, Navbar, Form, FormControl, Button} from 'reac
 import PostCard from '../PostCard/PostCard'
 import Constants from '../../config/Constants';
 import Header from '../Header/Header';
+import { setAllPostList } from '../../actions'
 
 class Profile extends React.Component {
 
@@ -30,7 +31,7 @@ class Profile extends React.Component {
     }
 
     componentWillMount(){
-        this.getUserProfile();
+        // this.getUserProfile();
         this.getLikedPosts();
     }
 

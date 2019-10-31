@@ -1,5 +1,5 @@
 
-export const setAllPostList = (name) => ({
+export const setAllPostList = (data) => ({
     type: 'ALL_POST',
     data
  });

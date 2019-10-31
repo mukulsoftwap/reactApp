@@ -23,6 +23,9 @@
     margin-bottom:15px; 
     margin-top:15px;
     position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+    min-height: 250px;
 }
 .mycard:hover .iconOverlay{
     opacity: 1;
