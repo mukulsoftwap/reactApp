@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { Row, Col, Container, Nav, Card, Form, FormControl, Button} from 'react-bootstrap'
 import Constants from '../../config/Constants'
 import './Login.css'
+import cookie from 'react-cookies'
 
 class Login extends React.Component {
 
@@ -10,7 +11,8 @@ class Login extends React.Component {
         super(props);
         this.state = {
             username : "",
-            password : ""
+            password : "",
+            gotoProfile : false
         }
     }
 
@@ -30,7 +32,13 @@ class Login extends React.Component {
         .then(res => res.json())
         .then(
           (result) => {
-            console.log(result)
+            if(result.data){
+                cookie.save("token", result.data.token);
+                this.setState({gotoProfile : true})
+
+            }else{
+                alert("something went wrong..")
+            }
           },
           (error) => {
           }
@@ -50,6 +58,7 @@ class Login extends React.Component {
     render(){
         return(
             <Container>
+                {this.state.gotoProfile ? <Redirect to='/profile' /> : null}
                 <Row>
                     <Col md="4"></Col>
                     <Col md="4">

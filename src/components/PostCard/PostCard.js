@@ -1,5 +1,7 @@
 import React from 'react';
 import './PostCard.css'
+import cookie from 'react-cookies'
+import { Redirect } from 'react-router-dom'
 
 class PostCard extends React.Component {
 
@@ -7,22 +9,32 @@ class PostCard extends React.Component {
         super(props);
         this.state = {
             postData : this.props.data,
-            index : this.props.position
+            index : this.props.position,
+            redirectToLogin : false
         }
     }
 
     likePost(index){
-        this.checkLogin();
+        this.checkLogin(index);
     }
 
-    checkLogin(){
-        
+    checkLogin(index){
+        cookie.load('token') ? this.addToLikePost(index) : this.gotoLogin(); 
+    }
+
+    gotoLogin(){
+        this.setState({redirectToLogin : true})
+    }
+
+    addToLikePost(index){
+        console.log(index)
     }
 
     render(){
         let likeimg = require('../../images/like.png')
         return(
             <div>
+                {this.state.redirectToLogin ? <Redirect to='/login' /> : null}
                 <div className={'mycard'}>
                     <img src={this.state.postData.img} />
                     <div className={'iconOverlay'}>

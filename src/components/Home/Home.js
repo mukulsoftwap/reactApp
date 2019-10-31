@@ -1,17 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import './App.css'
-import Constants from './config/Constants';
+import './Home.css'
+import Constants from '../../config/Constants';
 import { Row, Col, Container, Nav, Navbar, Form, FormControl, Button} from 'react-bootstrap'
-import PostCard from './pages/PostCard/PostCard';
+import PostCard from '../PostCard/PostCard';
+import Header from '../Header/Header';
 
-class App extends React.Component {
+
+class Home extends React.Component {
 
   constructor(props){
     super(props);
     this.state = {
-      feeds : []
+      feeds : [],
+      isLogedIn : false
     }
+  }
+
+  componentWillMount(){
     this.getFeeds();
   }
 
@@ -28,27 +34,10 @@ class App extends React.Component {
       )
   }
 
-  checkLogin(){
-    
-  }
-
   render() {
     return (
       <div>
-        <Navbar bg="light" variant="dark" fixed="top" >
-          <Container style={{maxWidth:960}}>
-            <Navbar.Brand>My Instagram</Navbar.Brand>
-            <Navbar.Toggle />
-            <Form inline>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            </Form>
-            
-            <Navbar.Collapse className="justify-content-end">
-                <Link to="/login"><Button variant="primary">Login</Button></Link>
-                <Button variant="link">Signup</Button>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+        <Header page={Constants.PAGES.HOME}></Header>
         <Container style={{maxWidth:960, marginTop:80}}>
           <Row>
             {
@@ -67,4 +56,4 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default Home
